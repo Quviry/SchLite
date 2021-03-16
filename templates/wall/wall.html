@@ -1,0 +1,99 @@
+{% load compress %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% compress css preload %}
+        <link href="{% static 'stylesheets/wall.css' %}" rel="stylesheet" type="text/css"
+              onload="this.onload=null;this.rel='stylesheet'">
+    {% endcompress %}
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="manifest" href="{% static 'manifest.json' %}">
+    {% compress css %}
+        <link href="{% static 'stylesheets/wall.css' %}" rel="stylesheet" type="text/css">
+    {% endcompress %}
+    <noscript>
+        {% compress css %}
+            <link rel="stylesheet" href="{% static 'stylesheets/wall.css' %}">
+        {% endcompress %}
+    </noscript>
+    <title>Wall</title>
+    {% compress js %}
+        <script src="{% static 'js/wall_content.js' %}" type="text/javascript" charset="utf-8" async defer></script>
+    {% endcompress %}
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body>
+
+<div id="webapp">
+
+    <div class="long_screen">
+        <noscript>
+            <h3>SITE NEED JS TO WORK</h3>
+        </noscript>
+        <div class="container">
+            <div id="top_bar" class="container">
+                <a class="top_link mob_only" aria-label="user"><img class="top_bar__icon" alt="User"
+                                                                    src="{% static 'images/user.svg' %}"
+                                                                    height="28" width="28"
+                title="{{ request.User.login }}"></a>
+                <a class="top_link mob_only" href="/logout" aria-label="logout"><img class="top_bar__icon" alt="Logout"
+                                                                                     src="{% static 'images/logout.svg' %}"
+                                                                                     height="28" width="28"></a>
+                <a class="top_link mob_only" aria-label="settings"><img class="top_bar__icon" alt="Settings"
+                                                                        src="{% static 'images/settings.svg' %}"
+                                                                        height="28" width="28"
+                title="Coming soon"></a>
+            </div>
+        </div>
+    </div>
+    <div id="schedule" class="container">
+        <script>
+            document.getElementById("schedule").insertAdjacentHTML('afterbegin', '<div class="loader">Ожидание загрузки... </div>')
+        </script>
+        <noscript>
+            <iframe src="./api_offline_schedule/" width="100%"></iframe>
+        </noscript>
+    </div>
+    <div class="ui_down_buttons">
+        <a id="backpack__button" aria-label="backpack button">
+            <div class="ui_down_button">
+                <img class="ui_down_button__icon" alt="Backpack" src="{% static 'images/backpack.svg' %}" height="28"
+                     width="28">
+            </div>
+        </a>
+        <noscript>functional in unavailable</noscript>
+        <a id="done__button" aria-label="done button">
+            <div class="ui_down_button">
+                <img class="ui_down_button__icon" alt="Done list" src="{% static 'images/done.svg' %}" height="28"
+                     width="28">
+            </div>
+        </a>
+        <noscript>functional in unavailable</noscript>
+    </div>
+    <div id="notifications">
+    </div>
+</div>
+</body>
+</html>

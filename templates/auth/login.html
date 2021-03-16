@@ -1,0 +1,80 @@
+{% load compress %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% compress css preload %}
+        <link href="{% static 'stylesheets/login.css' %}" rel="stylesheet" type="text/css"
+              onload="this.onload=null;this.rel='stylesheet'">
+    {% endcompress %}
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="manifest" href="{% static 'manifest.json' %}">
+    {% compress css %}
+        <link href="{% static 'stylesheets/login.css' %}" rel="stylesheet" type="text/css">
+    {% endcompress %}
+    <noscript>
+        {% compress css %}
+            <link rel="stylesheet" href="{% static 'stylesheets/login.css' %}">
+        {% endcompress %}
+    </noscript>
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body>
+<div id="webapp">
+    <div class="form_container">
+        <form action="" method="POST" autocomplete="off">
+            <img class="form_element" alt="school_img" height="150" width="250"
+                 src="{% static 'images/university.svg' %}">
+            <div class="form_elements">
+                {% csrf_token %}
+                {% if login_form.errors %}
+                    {% for error in login_form.non_field_errors %}
+                        <p class="error">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
+                {{ login_form.login }}<label for="id_login"> Enter your school.mosreg.ru login </label>
+                {% if login_form.login.errors %}
+                    <p class="error">{{ login_form.login.errors.as_text }}</p>
+                {% endif %}
+                {{ login_form.password }}<label for="id_password"> Enter your school.mosreg.ru password </label>
+                {% if login_form.password.errors %}
+                    <p class="error">{{ login_form.password.errors.as_text }}</p>
+                {% endif %}
+                <div class="form_element b_f">
+                    {{ login_form.license }}
+                    <label for="id_license">
+                        <div class="b_helptext">{{ login_form.license.help_text }}</div>
+                    </label>
+                </div>
+                <input type="submit" value="Войти" class="enter_button form_element">
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+</script>
+</body>
+</html>
