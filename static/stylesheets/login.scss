@@ -1,0 +1,121 @@
+
+/*!
+ * Copyright (c) 2021. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ * Morbi non lorem porttitor neque feugiat blandit. Ut vitae ipsum eget quam lacinia accumsan.
+ * Etiam sed turpis ac ipsum condimentum fringilla. Maecenas magna.
+ * Proin dapibus sapien vel ante. Aliquam erat volutpat. Pellentesque sagittis ligula eget metus.
+ * Vestibulum commodo. Ut rhoncus gravida arcu.
+ */
+
+// Imports
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
+
+// END Imports
+
+/* Variables sector */
+
+// Colors
+$absolute-background: #171719;
+$elements-background: #232228;
+$first-accent: #9e4054;
+$second-accent: #e57855;
+$text-main: #dad9dd;
+$softie: #86cdd1;
+$error: #770000;
+$soft-border: transparentize($text-main, 0.7);
+
+// Sizes
+$big-text-size: 16px;
+$big-text-weight: 700;
+$middle-text-size: 14px;
+$middle-text-weight: 400;
+$primitive-padding: 14px;
+$top_bar_height: 70px;
+
+/* Variables sector end */
+
+html, body{
+  margin: 0;
+  padding: 0;
+  font-family: "Ubuntu", SansSerif, sans-serif;
+}
+
+*, :after, :before{
+  box-sizing: border-box;
+}
+
+label{
+  opacity: 0.5;
+  padding-top: 2px;
+}
+
+// Form
+
+#webapp{
+  width: 100vw;
+  height: 100vh;
+  background: $absolute-background url("../images/background.png") center;
+  display: flex;
+  color: $text-main;
+  font-size: 12px;
+  .form_container{
+    padding: 20px 0 20px 0;
+    max-width: 250px;
+    margin: auto;
+    img{
+      height: 150px;
+      width: 100%;
+    }
+    .form_elements{
+      display: flex;
+      flex-direction: column;
+
+      .form_element{
+        margin-top: 30px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 0;
+        background-color: $elements-background;
+      }
+      .enter_button{
+        background-color: $elements-background;
+        color: $text-main;
+        width: fit-content;
+        font-size: 16px;
+        font-weight: 700;
+        min-width: 50px;
+        padding: 10px 20px;
+        margin: 20px auto auto;
+      }
+      .text_input{
+        -webkit-box-shadow: inset 0 0 0 50px $elements-background !important; /* Цвет фона */
+        -webkit-text-fill-color: $text-main !important; /* цвет текста */
+        color: $text-main !important; /* цвет текста */
+        font-size: 14px;
+      }
+      .b_f{
+        display: flex;
+        background-color: transparent;
+      }
+    }
+  }
+  .error{
+    color: $text-main;
+    background-color: $first-accent;
+    border-radius: 50px;
+    padding: 5px;
+  }
+}
+
+@media (max-width: 720px){
+  #webapp{
+    background: $absolute-background url("../images/mobile-background.png") center / 100vw auto no-repeat ;
+  }
+}
+
+@media (max-height: 490px) {
+  #webapp{
+    height: 100%
+  }
+}

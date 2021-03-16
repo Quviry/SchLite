@@ -1,0 +1,443 @@
+// Imports
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
+
+// END Imports
+
+// Animations
+
+@keyframes rotation {
+  from {
+    transform: none;
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes notify{
+  0%{
+    visibility: visible;
+    height: 0px;
+    width: 0;
+  }
+  25%{
+    height: 0;
+    width: 200px;
+  }
+  50%{
+    width: 200px;
+    height: 100px;
+  }
+  99%{
+
+  }
+  100%{
+    visibility: hidden;
+  }
+}
+
+//END Animations
+
+@mixin show_animated(){
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.2s linear, transform 0.2s linear;
+}
+
+/* Variables sector */
+
+// Colors
+$absolute-background: #171719;
+$elements-background: #232228;
+$first-accent: #E64960;
+$second-accent: #E57855;
+$text-main: #dad9dd;
+$softie: #6CE684;
+$text-accent: #3EB1E6;
+$error: #770000;
+$soft-border: transparentize($text-main, 0.7);
+
+// Sizes
+$big-text-size: 16px;
+$big-text-weight: 700;
+$middle-text-size: 14px;
+$middle-text-weight: 400;
+$primitive-padding: 14px;
+$top_bar_height: 70px;
+
+/* Variables sector end */
+
+// Elements meta
+
+html, body{
+  margin: 0;
+  padding: 0;
+
+  font-family: 'Ubuntu', SansSerif, sans-serif;
+  font-size: $middle-text-size;
+  text-align: left;
+  color: $text-main;
+  -webkit-font-smoothing: antialiased;
+  font-weight: $middle-text-weight;
+
+  background-color: $absolute-background;
+}
+
+h3{
+  font-size: $big-text-size;
+  font-weight: $big-text-weight;
+}
+
+noscript{
+  display: block;
+  background-color: $error;
+  h3{
+    background-color: $error;
+    margin: 0 auto;
+  }
+  iframe{
+    border: none;
+    height: 100vh;
+  }
+}
+
+img{
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+a{
+  color: $text-main;
+  text-decoration: underline;
+  &:hover{
+    filter: blur(0px);
+    color: rgb(77, 101, 255);
+  }
+  &:active{
+    filter: blur(1px);
+  }
+}
+
+*, :after, :before{
+  box-sizing: border-box;
+}
+
+// END Elements meta
+
+// Class meta
+
+#webapp{
+  position: relative;
+}
+
+.active{
+  transform: scale(1) !important;
+  opacity: 1 !important;
+}
+
+.blured{
+  filter: blur(5px) !important;
+}
+
+.error{
+  background-color: $error;
+  padding: 5px;
+}
+
+.long_screen{
+  width:100%;
+  text-align: center;
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  height: 0;
+  z-index: 10;
+}
+
+// END Class meta
+
+// Top bar
+
+#top_bar {
+  height: $top_bar_height;
+  text-align: center;
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
+  padding: $primitive-padding / 2 $primitive-padding ;
+  background: $absolute-background;
+}
+
+
+.top_link{
+  z-index: 10;
+  position: relative;
+  width: $top_bar_height - $primitive-padding;
+  border-radius: $primitive-padding;
+  border: 0.1px solid $soft-border;
+  background: $elements-background;
+  .top_bar__icon{
+    height: 100%;
+    width: $primitive-padding * 2;
+  }
+}
+
+// END Top bar
+
+// Schedule
+
+#schedule{
+  @include show_animated();
+  transition: all linear 200ms;
+  filter: blur(0px);
+  padding: $top_bar_height $primitive-padding $primitive-padding;
+  min-height: 90vh;
+  position: relative;
+  .loader{
+    width: 100%;
+    text-align: center;
+    padding: inherit;
+    &::after{
+      content: ' ';
+      position: fixed;
+      height: 20px;
+      width: 20px;
+      border-radius: 10px;
+      border : 2px solid $softie;
+      border-top: none;
+      border-bottom: none;
+      animation: 1s linear 1s infinite rotation;
+    }
+  }
+}
+
+.lesson_container{
+    color: $text-main;
+    background: $elements-background;
+    pointer-events: all;
+    opacity: 1;
+    min-height: 80px;
+    padding: $primitive-padding;
+    margin-top: $primitive-padding;
+    transition: box-shadow .2s ease;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border-radius: 10px;
+    .lesson_top_info {
+      display: flex;
+      justify-content: right;
+      .day_mark__today{
+        justify-self: right;
+        text-align: right;
+        background-color: $first-accent;
+        border-radius: 50px;
+        font-size: $middle-text-size - 2px;
+        font-weight: $big-text-weight;
+        padding: 1px $middle-text-size/2;
+        margin-right: $middle-text-size;
+      }
+      .day_mark__tomorrow{
+        justify-self: right;
+        text-align: right;
+        background-color: $second-accent;
+        border-radius: 50px;
+        font-size: $middle-text-size - 2px;
+        font-weight: $big-text-weight;
+        padding: 1px $middle-text-size/2;
+        margin-right: $middle-text-size;
+      }
+      .check_button{
+        justify-self: right;
+        text-align: right;
+        cursor: pointer;
+        transition: transform linear 0.1s;
+        &:hover{
+          transform: scale3d(1.2,1.2,1.2);
+        }
+        .check_button__icon{
+          height: 100%;
+          width: $primitive-padding;
+        }
+      }
+      .lesson_class {
+        color: transparentize($text-main, 0.4);
+        margin-right: auto;
+        font-weight: $middle-text-weight;
+        font-size: $middle-text-size;
+      }
+    }
+    .lesson_homework{
+      padding: $primitive-padding;
+      border-left: 3px solid $text-accent;
+      margin-top: $primitive-padding /2;
+    }
+  }
+
+// END Schedule
+
+// Bot buttons
+
+.ui_down_buttons{
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  align-items: end;
+  z-index: 9999;
+  .ui_down_button {
+    height: 50px;
+    width: 50px;
+    margin-top: $primitive-padding;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid $soft-border;
+    background: $elements-background;
+    &:hover {
+      filter: blur(0px);
+      color: rgb(77, 101, 255);
+    }
+    &:active {
+      filter: blur(1px);
+    }
+    .ui_down_button__icon{
+      height: 100%;
+      width: 28px;
+    }
+  }
+}
+
+
+// END Bot buttons
+
+// Notifications
+
+#notifications{
+  position: fixed;
+  left: 30px;
+  bottom: 30px;
+  .notification{
+    text-overflow: ellipsis;
+    padding: 10px;
+    width: 200px;
+    margin-top: $primitive-padding;
+    overflow: hidden;
+    border-radius: 10px;
+    background: $error;
+  }
+}
+
+// END Notifications
+
+// Done list
+
+#done_container{
+  @include show_animated;
+  top: 0;
+  position: absolute;
+  margin: 70px $primitive-padding;
+  width: calc(100% -  2 * 14px);
+  .lesson_container{
+    border: 1px solid $softie;
+    .check_button{
+      pointer-events: none;
+      filter: invert(93%) sepia(84%) saturate(689%) hue-rotate(156deg) brightness(3088%) contrast(83%);
+    }
+  }
+}
+
+#done_removing_container{
+  @include show_animated;
+  top: 0;
+  position: fixed;
+  margin: 70px $primitive-padding;
+  width: calc(100% -  2 * 14px);
+}
+
+// END Done list
+
+// Today
+
+
+
+// END Today
+
+
+// MOBILE
+@media screen and (min-width: 768px){
+  $screen-optimal: 768px;
+  .container{
+    width: 100%;
+    background-color: $absolute-background;
+  }
+  #top_bar{
+    width: $screen-optimal;
+  }
+  #schedule{
+    width: $screen-optimal;
+    margin: 0 auto;
+  }
+}
+// END MOBILE
+@media screen and (min-width: 992px){
+  $screen-optimal: 992px;
+  .container{
+    width: 100%;
+    background-color: $absolute-background;
+  }
+  #top_bar{
+    width: $screen-optimal;
+  }
+  #schedule{
+    width: $screen-optimal;
+    margin: 0 auto;
+  }
+  .day_mark__today{
+        font-size: $middle-text-size !important;
+      }
+  .day_mark__tomorrow{
+    font-size: $middle-text-size !important;
+  }
+  .lesson_class{
+    font-size: $big-text-size !important;
+  }
+}
+@media screen and (min-width: 1024px){
+  $screen-optimal: 1024px;
+  .container{
+    width: 100%;
+    background-color: $absolute-background;
+  }
+  #top_bar{
+    width: $screen-optimal;
+  }
+  #schedule{
+    width: $screen-optimal;
+    margin: 0 auto;
+  }
+}
+@media screen and (min-width: 1200px){
+  $screen-optimal: 1200px;
+  .container{
+    width: 100%;
+    background-color: $absolute-background;
+  }
+  #top_bar{
+    width: $screen-optimal;
+  }
+  #schedule{
+    width: $screen-optimal;
+    margin: 0 auto;
+  }
+}
+
+
+
+
+
