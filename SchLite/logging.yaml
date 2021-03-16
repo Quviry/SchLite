@@ -1,0 +1,34 @@
+version: 1
+disable_existing_loggers: False
+
+formatters:
+  toconsole:
+    format: '{asctime} | {levelname:5} | {threadName:9s} | {process:5d} | {module:10} | {lineno:3} > {message}'
+    style: '{'
+    datefmt: "%d-%m-%Y %H:%M:%S"
+
+handlers:
+  main_app_handler:
+    level: 'DEBUG'
+    class: logging.handlers.WatchedFileHandler
+    filename: logging/wall_app.log
+    formatter: toconsole
+  auth_app_handler:
+    level: 'DEBUG'
+    class: logging.handlers.WatchedFileHandler
+    filename: logging/auth_app.log
+    formatter: toconsole
+  console:
+    level: 'DEBUG'
+    class: logging.StreamHandler
+    formatter: toconsole
+
+loggers:
+  wall:
+    handlers: [main_app_handler, console]
+    level: DEBUG
+    propogate: True
+  auth:
+    handlers: [auth_app_handler, console]
+    level: DEBUG
+    propogate: True
